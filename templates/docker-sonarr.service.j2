@@ -1,0 +1,23 @@
+[Unit]
+Description=Radarr docker container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=30
+
+ExecStart=/usr/bin/docker run --rm \
+                              --name={{ sonarr_container_name }} \
+                              -v /etc/localtime:/etc/localtime:ro \
+                              -v {{ sonarr_config_dir }}:/config \
+                              -v {{ sonarr_download_dir }}:/downloads \
+                              -v {{ sonarr_tv_dir }}:/tv \
+                              -e PGID={{ result_gid.stdout }} -e PUID={{ result_uid.stdout }}  \
+                              -p {{ sonarr_port }}:8989 \
+                              linuxserver/sonarr
+
+ExecStop=/usr/bin/docker stop sonarr
+
+[Install]
+WantedBy=multi-user.target

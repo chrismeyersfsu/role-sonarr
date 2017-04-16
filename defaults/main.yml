@@ -1,0 +1,11 @@
+---
+sonarr_container_name: "sonarr"
+sonarr_user: "plex"
+sonarr_group: "plex"
+
+sonarr_config_dir: "/Media/_sonarr/"
+sonarr_download_dir: "/Media/_transmission/transmission_workdir/"
+sonarr_tv_dir: "/Media/TV"
+
+sonarr_port: 8989
+

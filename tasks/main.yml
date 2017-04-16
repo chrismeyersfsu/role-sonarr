@@ -1,0 +1,17 @@
+---
+- name: "Get group id for group"
+  shell: "id -g {{ sonarr_group }}"
+  register: result_gid
+
+- name: "Get User id for user"
+  shell: "id -u {{ sonarr_user }}"
+  register: result_uid
+  
+- name: "Lay down sonarr systemd file"
+  template:
+    src: "templates/docker-sonarr.service.j2"
+    dest: "/etc/systemd/system/docker-sonarr.service"
+    owner: root
+    group: root
+    mode: '0600'
+  sudo: true
